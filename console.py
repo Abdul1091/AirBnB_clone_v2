@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] is '{' and pline[-1] is'}'\
+                    if pline[0] is '{' and pline[-1] is '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -113,18 +113,51 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
-    def do_create(self, args):
-        """ Create an object of any class"""
-        if not args:
+    def do_create(self, arg):
+        """Creates a new instance of a class with specified parameters."""
+        args = arg.split()
+        if len(args) == 0:
             print("** class name missing **")
-            return
-        elif args not in HBNBCommand.classes:
+            return False
+
+        class_name = args[0]
+        if class_name not in classes:
             print("** class doesn't exist **")
-            return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
-        print(new_instance.id)
-        storage.save()
+            return False
+
+        # Initialize dictionary for attributes
+        new_dict = {}
+        for param in args[1:]:
+            if '=' not in param:
+                continue  # Skip parameters without '='
+
+            key, value = param.split('=', 1)
+            value = value.strip('"')
+
+            # Handle string values
+            if '"' in value:
+                value = value.replace('\\"', '"').replace('_', ' ')
+            # Handle float values
+            elif '.' in value:
+                try:
+                    value = float(value)
+                except ValueError:
+                    continue
+            # Handle integer values
+            else:
+                try:
+                    value = int(value)
+                except ValueError:
+                    continue
+
+            new_dict[key] = value
+
+        try:
+            instance = classes[class_name](**new_dict)
+            print(instance.id)
+            instance.save()
+        except Exception as e:
+            print(f"Error: {e}")
 
     def help_create(self):
         """ Help information for the create method """
@@ -319,6 +352,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
