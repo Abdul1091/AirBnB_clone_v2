@@ -4,6 +4,18 @@ This repository contains the initial stage of a student project to build a clone
 
 ---
 
+### Contributions and Updates
+
+This repository has been further developed and maintained by [Abdullahi Tukur](https://github.com/your-github-username).
+
+- Added functionality for handling updates using dictionaries.
+- Improved documentation and comments in the code.
+- Enhanced unit tests for better coverage and reliability.
+
+---
+
+---
+
 <center><h3>Repository Contents by Project Task</h3> </center>
 
 | Tasks | Files | Description |
@@ -139,4 +151,14 @@ Usage: <class_name>.update(<_id>, <dictionary>)
 (hbnb) User.all()
 (hbnb) ["[User] (98bea5de-9cb0-4d78-8a9d-c4de03521c30) {'updated_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134362), 'name': 'Fred the Frog', 'age': 9, 'id': '98bea5de-9cb0-4d78-8a9d-c4de03521c30', 'created_at': datetime.datetime(2020, 2, 19, 21, 47, 29, 134343)}"]
 ```
+---
+
+### Additional Notes
+
+For more information on the additional features and updates added to this project, please refer to the [detailed documentation](https://github.com/Abdul1091/AirBnB_clone_v2).
+
+For any questions or contributions, please reach out to [Abdullahi Tukur](abdul2kur1@gmail.com).
+
+---
+
 <br>
